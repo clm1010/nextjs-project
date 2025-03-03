@@ -35,10 +35,12 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Auth 令牌环境变量是 AUTH_SECRET。这是库用来加密令牌和电子邮件验证哈希的随机值。（请参阅部署以了解更多信息）。您可以通过运行以下代码生成一个 Auth.js CLI
 
+npx auth secret
 
 ## Prisma
 
-- npx prisma init --datasource-provider sqlite 在prisma文件中生成schema.prisma
-- npx prisma db push 在prisma文件中生成 dev.db
-- npx prisma generate 在prisma文件中生成 prisma/client 和模型对应的客户端
+- npx prisma init --datasource-provider sqlite 在 prisma 文件中生成 schema.prisma
+- npx prisma db push 在 prisma 文件中生成 dev.db
+- npx prisma generate 在 prisma 文件中生成 prisma/client 和模型对应的客户端
