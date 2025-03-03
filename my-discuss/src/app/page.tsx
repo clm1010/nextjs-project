@@ -1,4 +1,5 @@
-import SignIn from '@/components/SignIn'
+import SignIn from '@/components/SigninButton'
+import SignOut from '@/components/SignoutButton'
 import UserAvatar from '@/components/UserAvatar'
 
 export default function Page() {
@@ -6,6 +7,7 @@ export default function Page() {
     <div>
       <UserAvatar />
       <SignIn />
+      <SignOut />
     </div>
   )
 }

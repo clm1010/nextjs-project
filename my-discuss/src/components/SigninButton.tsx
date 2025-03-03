@@ -1,6 +1,9 @@
 import { signIn } from '@/auth'
-import { Button} from '@heroui/react'
+import { Button } from '@heroui/react'
 
+/**
+ * @description 登录
+ */
 export default function SignIn() {
   return (
     <form
@@ -9,7 +12,9 @@ export default function SignIn() {
         await signIn('github')
       }}
     >
-      <Button type='submit'>Signin with GitHub</Button>
+      <Button type='submit' color='primary'>
+        Signin with GitHub
+      </Button>
     </form>
   )
 }
