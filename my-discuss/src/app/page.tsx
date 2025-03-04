@@ -1,13 +1,14 @@
-import SignIn from '@/components/SigninButton'
-import SignOut from '@/components/SignoutButton'
-import UserAvatar from '@/components/UserAvatar'
+import TopicCreateForm from '@/components/TopicCreateForm'
 
 export default function Page() {
   return (
-    <div>
-      <UserAvatar />
-      <SignIn />
-      <SignOut />
+    <div className='flex justify-between'>
+      <div>
+        <h1 className='text-xl mt-2'>Top Posts</h1>
+      </div>
+      <div>
+        <TopicCreateForm />
+      </div>
     </div>
   )
 }
