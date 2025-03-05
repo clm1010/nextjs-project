@@ -12,7 +12,7 @@ export default async function TopicShowPage({ params }: TopicShowPageProps) {
         <h1 className='text-xl mt-2'>{name}</h1>
       </div>
       <div>
-        <PostCreateForm />
+        <PostCreateForm name={name} />
       </div>
     </div>
   )

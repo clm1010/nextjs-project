@@ -16,40 +16,45 @@ import {
   // Chip
 } from '@heroui/react'
 
+interface PostCreateFormProps {
+  name: string
+}
+
 /**
  * @description PostCreateForm
  */
-export default function PostCreateForm() {
+export default function PostCreateForm({ name }: PostCreateFormProps) {
+  console.log(name, 'name')
   return (
-    <Popover placement='left'>
+    <Popover placement="left">
       <PopoverTrigger>
-        <Button className='block ml-auto' color='secondary' variant='bordered'>
+        <Button className="block ml-auto" color="secondary" variant="bordered">
           Create a Post
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='p-0 w-full'>
-        <Card className='w-80 max-w-md' shadow='lg'>
+      <PopoverContent className="p-0 w-full">
+        <Card className="w-80 max-w-md" shadow='lg'>
           <CardHeader>Create a Post</CardHeader>
           <Divider />
           <CardBody>
-            <Form validationBehavior='aria'>
+            <Form validationBehavior="aria">
               <Input
-                label='title'
-                labelPlacement='outside'
-                name='title'
-                placeholder='Enter your title'
-                type='text'
+                label="title"
+                labelPlacement="outside"
+                name="title"
+                placeholder="Enter your title"
+                type="text"
               />
 
               <Textarea
-                className='max-w-xs'
-                label='Content'
-                labelPlacement='outside'
-                name='content'
-                placeholder='Enter your content'
+                className="max-w-xs"
+                label="Content"
+                labelPlacement="outside"
+                name="content"
+                placeholder="Enter your content"
               />
-              <div className='flex gap-2 w-full'>
-                <Button className='flex-1' color='secondary' type='submit'>
+              <div className="flex gap-2 w-full">
+                <Button className="flex-1" color="secondary" type="submit">
                   Submit
                 </Button>
               </div>
