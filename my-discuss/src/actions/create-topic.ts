@@ -1,6 +1,10 @@
 'use server'
 import { z } from 'zod'
 import { auth } from '@/auth'
+import { prisma } from '@/prisma'
+import type { Topic } from '@prisma/client'
+import { redirect } from 'next/navigation'
+import { sleep } from '@/utils'
 
 interface CreateTopicFormState {
   errors: {
@@ -21,16 +25,24 @@ const createTopicSchema = z.object({
   description: z.string().min(10).max(4747)
 })
 
+/**
+ * @description 创建话题表单提交处理
+ * @param prevState
+ * @param formData 表单
+ * @returns
+ */
 export async function CreateTopic(
   prevState: CreateTopicFormState,
   formData: FormData
 ): Promise<CreateTopicFormState> {
+  await sleep(3000)
+
+  // 校验表单
   const name = formData.get('name')
   const description = formData.get('description')
   const result = createTopicSchema.safeParse({ name, description })
 
   if (!result.success) {
-    console.log(result.error.flatten().fieldErrors)
     return {
       errors: result.error.flatten().fieldErrors
     }
@@ -46,8 +58,31 @@ export async function CreateTopic(
     }
   }
 
-  return {
-    errors: {}
+  let topic: Topic
+  try {
+    // 创建话题提交数据到数据库
+    topic = await prisma.topic.create({
+      data: {
+        name: result.data.name,
+        description: result.data.description,
+        userId: session.user.id!
+      }
+    })
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return {
+        errors: {
+          _form: [err.message]
+        }
+      }
+    } else {
+      return {
+        errors: {
+          _form: ['Something went wrong.']
+        }
+      }
+    }
   }
-  console.log(name, description)
+
+  redirect(`/topics/${topic.name}`)
 }

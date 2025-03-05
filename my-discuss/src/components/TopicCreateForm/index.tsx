@@ -18,7 +18,7 @@ import {
 import { CreateTopic } from '@/actions/index'
 
 export default function TopicCreateForm() {
-  const [state, formAction] = useActionState(CreateTopic, {
+  const [state, formAction, isPending] = useActionState(CreateTopic, {
     errors: {}
   })
 
@@ -29,61 +29,72 @@ export default function TopicCreateForm() {
     startTransition(() => formAction(formData))
   }
 
-  // 处理表单重置
-  const handleReset = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-  }
+  // // 处理表单重置
+  // const handleReset = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault()
+  //    reset
+  // }
 
   return (
-    <Popover placement="left">
+    <Popover placement='left'>
       <PopoverTrigger>
-        <Button color="secondary" variant="bordered">
+        <Button color='secondary' variant='bordered'>
           Create a Topic
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 w-full">
-        <Card className="w-80 max-w-md" shadow="lg">
+      <PopoverContent className='p-0 w-full'>
+        <Card className='w-80 max-w-md' shadow='lg'>
           <CardHeader>Create a Topic</CardHeader>
           <Divider />
           <CardBody>
             <Form
               onSubmit={handleSubmit}
-              validationBehavior="aria"
-              onReset={handleReset}
+              validationBehavior='aria'
+              // onReset={handleReset}
             >
               <Input
                 isInvalid={!!state.errors.name}
                 errorMessage={state.errors.name?.join(', ')}
-                label="Name"
-                labelPlacement="outside"
-                name="name"
-                placeholder="Enter your name"
-                type="text"
+                label='Name'
+                labelPlacement='outside'
+                name='name'
+                placeholder='Enter your name'
+                type='text'
               />
 
               <Textarea
                 isInvalid={!!state.errors.description}
                 errorMessage={state.errors.description?.join(', ')}
-                className="max-w-xs"
-                label="Description"
-                labelPlacement="outside"
-                name="description"
-                placeholder="Enter your description"
+                className='max-w-xs'
+                label='Description'
+                labelPlacement='outside'
+                name='description'
+                placeholder='Enter your description'
               />
-              <div className="flex gap-2 w-full">
-                <Button className="flex-1" color="secondary" type="submit">
+              <div className='flex gap-2 w-full'>
+                <Button
+                  className='flex-1'
+                  color='secondary'
+                  type='submit'
+                  isLoading={isPending}
+                >
                   Submit
                 </Button>
-                <Button className="flex-1" type="reset" variant="flat">
+                {/* <Button className='flex-1' type='reset' variant='flat'>
                   Reset
-                </Button>
+                </Button> */}
               </div>
             </Form>
           </CardBody>
 
           {state.errors._form ? (
             <CardFooter>
-              <Chip className='mx-auto' variant="bordered" radius="sm" color="danger">
+              <Chip
+                className='mx-auto'
+                variant='bordered'
+                radius='sm'
+                color='danger'
+              >
                 {state.errors._form.join(', ')}
               </Chip>
             </CardFooter>

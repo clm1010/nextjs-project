@@ -7,6 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// 用户表
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -17,9 +18,11 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  Topics        Topic[] // 关联的话题
+  Posts         Post[] // 关联的帖子
+  Comments      Comment[] // 关联的评论
 }
 
 model Account {
@@ -77,4 +80,56 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, credentialID])
+}
+
+// 话题表
+model Topic {
+  //字段名字     字段类型  字段属性
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  // 关联 User 字段
+  // 语法： 字段名称 字段类型（目标模型的名称）@relation(fields: [当前模型的外键], references: [目标模型的主键], onDelete: Cascade)
+  // onDelete: Cascade 当目标模型User 某一天记录被删除，当前模型的记录也会被级联删除
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  // 关联 Post 字段
+  Posts       Post[]
+}
+
+// 帖子表
+model Post {
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  // 关联 User 字段
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  // 关联 Topic 字段
+  topic     Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topicId   String
+  // 关联 Comment 字段
+  Comments  Comment[]
+}
+
+// 评论表
+model Comment {
+  id        String    @id @default(cuid())
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  // 关联 User 字段
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  // 关联 Post 字段
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  // 评论模型自关联关系
+  parent    Comment?  @relation("Comments", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId  String?
+  children  Comment[] @relation("Comments")
 }
