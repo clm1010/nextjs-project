@@ -17,6 +17,9 @@ import {
 } from '@heroui/react'
 import { CreateTopic } from '@/actions/index'
 
+/**
+ * @description TopicCreateForm 创建话题表单
+ */
 export default function TopicCreateForm() {
   const [state, formAction, isPending] = useActionState(CreateTopic, {
     errors: {}
@@ -38,7 +41,7 @@ export default function TopicCreateForm() {
   return (
     <Popover placement='left'>
       <PopoverTrigger>
-        <Button color='secondary' variant='bordered'>
+        <Button className='block ml-auto' color='secondary' variant='bordered'>
           Create a Topic
         </Button>
       </PopoverTrigger>

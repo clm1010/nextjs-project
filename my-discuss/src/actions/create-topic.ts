@@ -1,10 +1,10 @@
 'use server'
 import { z } from 'zod'
 import { auth } from '@/auth'
-import { prisma } from '@/prisma'
 import type { Topic } from '@prisma/client'
 import { redirect } from 'next/navigation'
 import { sleep } from '@/utils'
+import { fetchCreateTopic } from '@/db/create/topics'
 
 interface CreateTopicFormState {
   errors: {
@@ -61,12 +61,10 @@ export async function CreateTopic(
   let topic: Topic
   try {
     // 创建话题提交数据到数据库
-    topic = await prisma.topic.create({
-      data: {
-        name: result.data.name,
-        description: result.data.description,
-        userId: session.user.id!
-      }
+    topic = await fetchCreateTopic({
+      name: result.data.name,
+      description: result.data.description,
+      userId: session.user.id!
     })
   } catch (err: unknown) {
     if (err instanceof Error) {

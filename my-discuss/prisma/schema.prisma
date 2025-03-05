@@ -17,12 +17,12 @@ model User {
   accounts      Account[]
   sessions      Session[]
   // Optional for WebAuthn support
-  Authenticator Authenticator[]
+  authenticator Authenticator[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
-  Topics        Topic[] // 关联的话题
-  Posts         Post[] // 关联的帖子
-  Comments      Comment[] // 关联的评论
+  topics        Topic[] // 关联的话题
+  posts         Post[] // 关联的帖子
+  comments      Comment[] // 关联的评论
 }
 
 model Account {
@@ -96,7 +96,7 @@ model Topic {
   User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   // 关联 Post 字段
-  Posts       Post[]
+  posts       Post[]
 }
 
 // 帖子表
@@ -113,7 +113,7 @@ model Post {
   topic     Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId   String
   // 关联 Comment 字段
-  Comments  Comment[]
+  comments  Comment[]
 }
 
 // 评论表

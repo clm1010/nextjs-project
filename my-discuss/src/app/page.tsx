@@ -1,4 +1,5 @@
-import TopicCreateForm from '@/components/TopicCreateForm'
+import TopicCreateForm from '@/components/Topics/TopicCreateForm'
+import TopicList from '@/components/Topics/TopicList'
 
 export default function Page() {
   return (
@@ -8,6 +9,7 @@ export default function Page() {
       </div>
       <div>
         <TopicCreateForm />
+        <TopicList />
       </div>
     </div>
   )
