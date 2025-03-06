@@ -49,7 +49,7 @@ export default function HeaderAuth() {
               <Avatar
                 isBordered
                 radius='full'
-                size='md'
+                size='lg'
                 src={
                   session.user.image ||
                   'https://i.pravatar.cc/150?u=a042581f4e29026024d'

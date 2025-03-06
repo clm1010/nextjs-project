@@ -44,3 +44,4 @@ npx auth secret
 - npx prisma init --datasource-provider sqlite 在 prisma 文件中生成 schema.prisma
 - npx prisma db push 在 prisma 文件中生成 dev.db
 - npx prisma generate 在 prisma 文件中生成 prisma/client 和模型对应的客户端
+- npx prisma db push && npx prisma generate
