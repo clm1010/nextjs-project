@@ -3,7 +3,8 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Input
+  Input,
+  Link
 } from '@heroui/react'
 import HeaderAuth from './HeaderAuth'
 
@@ -28,7 +29,9 @@ export default async function Header() {
     <Navbar className='border-b-1 border-gray-200'>
       <NavbarBrand>
         <AcmeLogo />
-        <p className='font-bold text-inherit'>MyDiscuss</p>
+        <Link className='font-bold text-inherit' href='/'>
+          MyDiscuss
+        </Link>
       </NavbarBrand>
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
         <NavbarItem>

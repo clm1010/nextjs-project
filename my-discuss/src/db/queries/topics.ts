@@ -15,3 +15,17 @@ export const fetchTopics = async () => {
     }
   })
 }
+
+/**
+ * @description 查询单个话题
+ * @param params name 帖子名称
+ * @returns topic
+ */
+export const fetchFindFirstTopic = async (params: { name: string }) => {
+  const { name } = params
+  return prisma.topic.findFirst({
+    where: {
+      name
+    }
+  })
+}

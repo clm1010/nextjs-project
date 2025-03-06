@@ -38,7 +38,7 @@ export default async function TopicList() {
               variant='shadow'
               color='default'
             >
-              <Link href={`/topic/${topic.name}`}>{topic.name}</Link>
+              <Link href={`/topics/${topic.name}`}>{topic.name}</Link>
             </Chip>
           </Badge>
         )
