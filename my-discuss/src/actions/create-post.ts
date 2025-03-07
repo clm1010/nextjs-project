@@ -69,7 +69,6 @@ export async function CreatePost(
 
   // 查询单个话题
   const topic = await fetchFindFirstTopic({ name })
-  console.log(topic, 'topic')
   if (!topic) {
     return {
       errors: {
