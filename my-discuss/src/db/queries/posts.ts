@@ -20,7 +20,9 @@ export type PostWithData = {
  * @param name 话题名称
  * @returns Promise<PostWithData[]>
  */
-export function fetchPostsByTopicName(name: string): Promise<PostWithData[]> {
+export const fetchPostsByTopicName = (
+  name: string
+): Promise<PostWithData[]> => {
   return prisma.post.findMany({
     where: {
       topic: {
@@ -51,7 +53,7 @@ export function fetchPostsByTopicName(name: string): Promise<PostWithData[]> {
  * @description 查询热门帖子
  * @returns Promise<PostWithData[]>
  */
-export function fetchTopPosts(): Promise<PostWithData[]> {
+export const fetchTopPosts = (): Promise<PostWithData[]> => {
   return prisma.post.findMany({
     orderBy: [
       {
@@ -78,6 +80,19 @@ export function fetchTopPosts(): Promise<PostWithData[]> {
           comments: true
         }
       }
+    }
+  })
+}
+
+/**
+ * @description fetchPostShow 查询帖子详情
+ * @param postId 帖子id
+ * @returns Post帖子对象 Promise<Post | null>
+ */
+export const fetchPostShow = (postId: string): Promise<Post | null> => {
+  return prisma.post.findFirst({
+    where: {
+      id: postId
     }
   })
 }

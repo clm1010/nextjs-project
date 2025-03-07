@@ -6,6 +6,8 @@ import {
   Form,
   Button,
   Avatar,
+  User,
+  // Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -25,6 +27,7 @@ export default function HeaderAuth() {
 
   // 客户端组件方式，获取当前用户的信息
   const { data: session, status } = useSession()
+  console.log(session?.user, 'session');
   if (status === 'loading') {
     authContent = <Spinner size='md' variant='gradient' color='secondary' />
   } else if (session?.user) {
@@ -46,21 +49,22 @@ export default function HeaderAuth() {
         <PopoverContent className='p-0'>
           <Card className='max-w-[300px]' shadow='lg'>
             <CardHeader className='flex gap-3'>
-              <Avatar
-                isBordered
-                radius='full'
-                size='lg'
-                src={
-                  session.user.image ||
-                  'https://i.pravatar.cc/150?u=a042581f4e29026024d'
+              <User
+                avatarProps={{
+                  src:
+                    session.user.image ||
+                    'https://i.pravatar.cc/150?u=a042581f4e29026024d'
+                }}
+                description={
+                  // <Link isExternal href='https://x.com/jrgarciadev' size='sm'>
+                  // {session.user.email}
+                  // </Link>
+                  <p className='text-small text-default-500'>
+                    {session.user.email}
+                  </p>
                 }
+                name={session.user.name || 'User'}
               />
-              <div className='flex flex-col'>
-                <p className='text-md'>{session.user.name}</p>
-                <p className='text-small text-default-500'>
-                  {session.user.email}
-                </p>
-              </div>
             </CardHeader>
             <Divider />
             <CardBody>

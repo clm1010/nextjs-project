@@ -1,16 +1,27 @@
+import { Suspense } from 'react'
+import PostShow from '@/components/Posts/PostShow/index'
+import PostShowLoading from '@/components/Posts/PostShowLoading/index'
+import CommentCreateForm from '@/components/Comments/CommentCreateForm/index'
+
 interface PostShowPageProps {
-  params: Promise<{
+  params: {
     name: string
     postId: string
-  }>
+  }
 }
 
+/**
+ * @description 帖子详情页
+ * @param params PostShowPageProps { name: string postId: string }
+ */
 export default async function PostShowPage({ params }: PostShowPageProps) {
-  const { name, postId } = await params
+  const { postId } = await params
   return (
-    <div>
-      <p>name：{name}</p>
-      <p>postId：{postId}</p>
+    <div className='space-y-4'>
+      <Suspense fallback={<PostShowLoading />}>
+        <PostShow postId={postId} />
+      </Suspense>
+      <CommentCreateForm />
     </div>
   )
 }

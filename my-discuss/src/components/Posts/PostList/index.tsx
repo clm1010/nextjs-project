@@ -1,14 +1,17 @@
 'use client'
 import { Listbox, ListboxItem, Avatar } from '@heroui/react'
 import type { PostWithData } from '@/db/queries/posts'
+import { useRouter } from 'next/navigation'
 
 /**
  * @description PostList 帖子列表组件
  */
 export default function PostList({ posts }: { posts: PostWithData[] }) {
+  const router = useRouter()
+
   return (
     <Listbox
-      aria-label="Post List"
+      aria-label='Post List'
       itemClasses={{
         base: 'border-small border-default-200 shadow-small rounded-medium mt-4 data-[hover=true]:bg-purple-400/30'
       }}
@@ -21,15 +24,15 @@ export default function PostList({ posts }: { posts: PostWithData[] }) {
         return (
           <ListboxItem
             key={post.id}
-            description={<p className="text-small mt-4">{post.user.name}</p>}
+            description={<p className='text-small mt-4'>{post.user.name}</p>}
             startContent={
               post.user.image && (
                 <div>
                   <Avatar
-                    className="w-8 h-8"
+                    className='w-8 h-8'
                     showFallback
                     isBordered
-                    color="secondary"
+                    color='secondary'
                     src={
                       post.user.image ||
                       'https://i.pravatar.cc/150?u=a042581f4e29026024d'
@@ -39,10 +42,13 @@ export default function PostList({ posts }: { posts: PostWithData[] }) {
               )
             }
             endContent={
-              <span className="text-small text-gray-400 whitespace-nowrap self-end">
+              <span className='text-small text-gray-400 whitespace-nowrap self-end'>
                 {post._count.comments} comments
               </span>
             }
+            onPress={() => {
+              router.push(`/topics/${topicName}/posts/${post.id}`)
+            }}
           >
             {post.title}
           </ListboxItem>

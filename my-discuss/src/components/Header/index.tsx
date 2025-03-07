@@ -28,9 +28,9 @@ export default async function Header() {
   return (
     <Navbar className='border-b-1 border-gray-200'>
       <NavbarBrand>
-        <AcmeLogo />
-        <Link className='font-bold text-inherit' href='/'>
-          MyDiscuss
+        <Link className='flex items-center text-inherit ml-[-10px]' href='/'>
+          <AcmeLogo />
+          <h1 className='font-bold'>MyDiscuss</h1>
         </Link>
       </NavbarBrand>
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
