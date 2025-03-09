@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import PostShow from '@/components/Posts/PostShow/index'
 import PostShowLoading from '@/components/Posts/PostShowLoading/index'
 import CommentCreateForm from '@/components/Comments/CommentCreateForm/index'
+import CommentList from '@/components/Comments/CommentList'
 
 interface PostShowPageProps {
   params: {
@@ -17,11 +18,13 @@ interface PostShowPageProps {
 export default async function PostShowPage({ params }: PostShowPageProps) {
   const { postId } = await params
   return (
-    <div className='space-y-4'>
+    <div className="space-y-4">
       <Suspense fallback={<PostShowLoading />}>
         <PostShow postId={postId} />
       </Suspense>
       <CommentCreateForm postId={postId} />
+
+      <CommentList postId={postId} />
     </div>
   )
 }
