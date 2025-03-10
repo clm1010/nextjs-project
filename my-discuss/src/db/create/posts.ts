@@ -12,7 +12,7 @@ interface paramsType {
  * @param params paramsType { title, content, userId, topicId }
  * @returns
  */
-export const fetchCreatePost = async (params: paramsType) => {
+export const fetchCreatePost = (params: paramsType) => {
   const { title, content, userId, topicId } = params
   return prisma.post.create({
     data: {

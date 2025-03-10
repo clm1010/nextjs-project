@@ -1,6 +1,7 @@
 import { Image } from '@heroui/react'
 import dayjs from 'dayjs'
 import type { CommentWithUser } from '@/db/queries/comment'
+import CommentCreateForm from '../CommentCreateForm/index'
 
 // image src
 // https://i.pravatar.cc/150?u=a04258114e29026702d
@@ -11,7 +12,7 @@ import type { CommentWithUser } from '@/db/queries/comment'
  * @description 评论展示 组件
  */
 export default function CommentShow({ comment }: { comment: CommentWithUser }) {
-  const { user, content } = comment
+  const { user, content, postId } = comment
   return (
     <div className="border mt-2 p-4 rounded-lg shadow-medium">
       <div className="flex gap-4">
@@ -25,11 +26,12 @@ export default function CommentShow({ comment }: { comment: CommentWithUser }) {
         <div className="flex-1">
           <p className="text-sm font-medium text-gray-500">{user.name}</p>
           <p className="flex justify-between items-center">
-            <span className="flex-1  text-gray-900">{comment.content}</span>
+            <span className="flex-1  text-gray-900">{content}</span>
             <span className="w-[150px] text-right text-gray-400 text-sm">
               {dayjs(comment.createdAt).format('YYYY/MM/DD HH:mm:ss')}
             </span>
           </p>
+          <CommentCreateForm postId={postId} />
         </div>
       </div>
       {/* mark */}

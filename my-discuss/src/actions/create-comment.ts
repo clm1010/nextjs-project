@@ -11,11 +11,19 @@ interface CreateCommentFormState {
     content?: string[]
     _form?: string[]
   }
+  success?: boolean
 }
 
 // 校验表单
 const createCommentSchema = z.object({
-  content: z.string().min(3)
+  content: z
+    .string()
+    .trim()
+    .min(3)
+    .regex(/^[\u4e00-\u9fa5a-zA-Z0-9_，。；：”“‘’！、？""''!?\.《》<>()（）]+$/, {
+      message:
+        'Content cannot be less than 6 characters and can contain only letters, digits, and underscores.'
+    })
 })
 
 /**
@@ -85,6 +93,7 @@ export async function CreateComment(
   revalidatePath(`/topics/${topic.name}/posts/${postId}`)
 
   return {
-    errors: {}
+    errors: {},
+    success: true
   }
 }

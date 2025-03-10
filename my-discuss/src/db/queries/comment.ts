@@ -14,9 +14,9 @@ export type CommentWithUser = {
  * @param postId 帖子id
  * @returns Promise <CommentWithUser[]>
  */
-export function fetchCommentsByPostId(
+export const fetchCommentsByPostId = (
   postId: string
-): Promise<CommentWithUser[]> {
+): Promise<CommentWithUser[]> => {
   return prisma.comment.findMany({
     where: {
       postId

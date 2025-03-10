@@ -12,17 +12,27 @@ interface CreateTopicFormState {
     description?: string[]
     _form?: string[]
   }
+  success?: boolean
 }
 
 const createTopicSchema = z.object({
   name: z
     .string()
+    .trim()
     .min(3)
-    .regex(/^[a-zA-Z0-9]+$/, {
+    .regex(/^[\u4e00-\u9fa5a-zA-Z0-9_]+$/, {
       message:
-        'Name must be lest 3 characters long and contain only letters, numbers, and underscores.'
+        'Name cannot be less than 3 characters and can contain only letters, digits, and underscores.'
     }),
-  description: z.string().min(10).max(4747)
+  description: z
+    .string()
+    .trim()
+    .min(6)
+    .max(4747)
+    .regex(/^[\u4e00-\u9fa5a-zA-Z0-9_，。；：”“‘’！？""''!?.《》<>()（）]+$/, {
+      message:
+        'Description cannot be less than 6 characters and can contain only letters, digits, and underscores.'
+    })
 })
 
 /**
@@ -44,7 +54,8 @@ export async function CreateTopic(
 
   if (!result.success) {
     return {
-      errors: result.error.flatten().fieldErrors
+      errors: result.error.flatten().fieldErrors,
+      success: false
     }
   }
 
@@ -54,30 +65,35 @@ export async function CreateTopic(
     return {
       errors: {
         _form: ['You must be signed in to create a topic.']
-      }
+      },
+      success: false
     }
   }
 
   let topic: Topic
   try {
+    console.log(result.data, 'result.data')
     // 创建话题提交数据到数据库
     topic = await fetchCreateTopic({
       name: result.data.name,
       description: result.data.description,
       userId: session.user.id!
     })
+    console.log(topic, 'topic')
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {
         errors: {
           _form: [err.message]
-        }
+        },
+        success: false
       }
     } else {
       return {
         errors: {
           _form: ['Something went wrong.']
-        }
+        },
+        success: false
       }
     }
   }
