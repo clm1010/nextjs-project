@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { auth } from '@/auth'
 import type { Comment } from '@prisma/client'
 import { fetchCreateComment } from '@/db/create/comment'
+import { fetchFindFirstTopicObjectByPostId } from '@/db/queries/topics'
+import { revalidatePath } from 'next/cache'
 
 interface CreateCommentFormState {
   errors: {
@@ -69,7 +71,19 @@ export async function CreateComment(
       }
     }
   }
-  console.log(comment, 'comment');
+  console.log(comment, 'comment')
+  // 根据帖子id查询话题
+  const topic = await fetchFindFirstTopicObjectByPostId({ postId })
+
+  if (!topic) {
+    return {
+      errors: {
+        _form: ['Topic not found.']
+      }
+    }
+  }
+  revalidatePath(`/topics/${topic.name}/posts/${postId}`)
+
   return {
     errors: {}
   }
