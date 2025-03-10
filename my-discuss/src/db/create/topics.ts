@@ -8,6 +8,7 @@ interface paramsType {
 
 /**
  * @description 创建话题
+ * @function fetchCreateTopic
  * @param params paramsType { name, description, userId }
  * @returns
  */

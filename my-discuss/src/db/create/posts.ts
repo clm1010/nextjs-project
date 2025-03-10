@@ -9,6 +9,7 @@ interface paramsType {
 
 /**
  * @description 创建帖子
+ * @function fetchCreatePost
  * @param params paramsType { title, content, userId, topicId }
  * @returns
  */

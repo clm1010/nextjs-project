@@ -17,6 +17,7 @@ export type PostWithData = {
 
 /**
  * @description 根据话题名称查询帖子
+ * @function fetchPostsByTopicName
  * @param name 话题名称
  * @returns Promise<PostWithData[]>
  */
@@ -51,6 +52,7 @@ export const fetchPostsByTopicName = (
 
 /**
  * @description 查询热门帖子
+ * @function fetchTopPosts
  * @returns Promise<PostWithData[]>
  */
 export const fetchTopPosts = (): Promise<PostWithData[]> => {
@@ -86,6 +88,7 @@ export const fetchTopPosts = (): Promise<PostWithData[]> => {
 
 /**
  * @description fetchPostShow 查询帖子详情
+ * @function fetchPostShow
  * @param postId 帖子id
  * @returns Post帖子对象 Promise<Post | null>
  */

@@ -10,6 +10,7 @@ export type TopicWithData = {
 
 /**
  * @description 查询话题
+ * @function fetchTopics
  */
 export const fetchTopics = (): Promise<TopicWithData[]> => {
   return prisma.topic.findMany({
@@ -26,6 +27,7 @@ export const fetchTopics = (): Promise<TopicWithData[]> => {
 
 /**
  * @description 查询单个话题
+ * @function fetchFindFirstTopic
  * @param params name 帖子名称
  * @returns topic
  */
@@ -42,6 +44,7 @@ export const fetchFindFirstTopic = (params: {
 
 /**
  * @description 根据帖子id查询话题
+ * @function fetchFindFirstTopicObjectByPostId
  * @param params postId
  * @returns topic
  */

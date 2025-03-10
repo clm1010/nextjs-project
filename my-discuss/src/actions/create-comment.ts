@@ -20,10 +20,13 @@ const createCommentSchema = z.object({
     .string()
     .trim()
     .min(3)
-    .regex(/^[\u4e00-\u9fa5a-zA-Z0-9_，。；：”“‘’！、？""''!?\.《》<>()（）]+$/, {
-      message:
-        'Content cannot be less than 6 characters and can contain only letters, digits, and underscores.'
-    })
+    .regex(
+      /^[\u4e00-\u9fa5a-zA-Z0-9_，。；：”“‘’！、？""''!?\.《》<>()（）\s]+$/,
+      {
+        message:
+          'Content cannot be less than 6 characters and can contain only letters, digits, and underscores.'
+      }
+    )
 })
 
 /**
@@ -34,7 +37,7 @@ const createCommentSchema = z.object({
  * @returns
  */
 export async function CreateComment(
-  { postId }: { postId: string },
+  { postId, parentId }: { postId: string; parentId?: string },
   prevState: CreateCommentFormState,
   formData: FormData
 ): Promise<CreateCommentFormState> {
@@ -62,7 +65,8 @@ export async function CreateComment(
     comment = await fetchCreateComment({
       content: result.data.content,
       userId: session.user.id!,
-      postId
+      postId,
+      parentId
     })
   } catch (err: unknown) {
     if (err instanceof Error) {

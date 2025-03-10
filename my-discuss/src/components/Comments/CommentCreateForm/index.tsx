@@ -11,18 +11,23 @@ import { CreateComment } from '@/actions/index'
 // import { sleep } from '@/utils'
 
 interface CreateCommentFormProps {
-  postId: string,
+  postId: string
   isOpen?: boolean
+  parentId?: string
 }
 
 /**
  * @description 评论组件
  */
-export default function CommentCreateForm({ postId, isOpen }: CreateCommentFormProps) {
+export default function CommentCreateForm({
+  postId,
+  isOpen,
+  parentId
+}: CreateCommentFormProps) {
   // 显示或隐藏评论
   const [open, setOpen] = useState(isOpen)
   const [state, formAction, isPending] = useActionState(
-    CreateComment.bind(null, { postId }),
+    CreateComment.bind(null, { postId, parentId }),
     {
       errors: {}
     }
@@ -44,10 +49,10 @@ export default function CommentCreateForm({ postId, isOpen }: CreateCommentFormP
   }, [state])
 
   return (
-    <div className="space-y-2 mt-4">
+    <div className='space-y-2 mt-4'>
       <Button
-        color="secondary"
-        size="sm"
+        color='secondary'
+        size='sm'
         variant={open ? 'shadow' : 'flat'}
         onPress={() => setOpen(!open)}
       >
@@ -57,32 +62,32 @@ export default function CommentCreateForm({ postId, isOpen }: CreateCommentFormP
         <Form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="space-y-4"
-          validationBehavior="aria"
+          className='space-y-4'
+          validationBehavior='aria'
         >
           <Textarea
-            name="content"
+            name='content'
             // className='max-w-xs'
-            label="Reply"
-            labelPlacement="inside"
-            placeholder="Enter your comment..."
+            label='Reply'
+            labelPlacement='inside'
+            placeholder='Enter your comment...'
             isInvalid={!!state.errors.content}
             errorMessage={state.errors.content?.join(', ')}
           />
           {state.errors._form ? (
             <Chip
-              className="mx-auto"
-              variant="bordered"
-              radius="sm"
-              color="danger"
+              className='mx-auto'
+              variant='bordered'
+              radius='sm'
+              color='danger'
             >
               {state.errors._form.join(', ')}
             </Chip>
           ) : null}
           <Button
-            type="submit"
-            color="secondary"
-            variant="bordered"
+            type='submit'
+            color='secondary'
+            variant='bordered'
             isLoading={isPending}
           >
             Create Comment
