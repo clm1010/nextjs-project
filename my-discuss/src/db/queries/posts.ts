@@ -87,7 +87,7 @@ export const fetchTopPosts = (): Promise<PostWithData[]> => {
 }
 
 /**
- * @description fetchPostShow 查询帖子详情
+ * @description 查询帖子详情
  * @function fetchPostShow
  * @param postId 帖子id
  * @returns Post帖子对象 Promise<Post | null>
@@ -96,6 +96,51 @@ export const fetchPostShow = (postId: string): Promise<Post | null> => {
   return prisma.post.findFirst({
     where: {
       id: postId
+    }
+  })
+}
+
+/**
+ * @description 查询帖子名称或内容
+ * @function fetchPostsByPostNameOrContent
+ * @param postnamecontent 帖子 name 或 content
+ * @returns Promise<PostWithData[]>
+ */
+export const fetchPostsByPostNameOrContent = (
+  postnamecontent: string
+): Promise<PostWithData[]> => {
+  return prisma.post.findMany({
+    include: {
+      topic: {
+        select: {
+          name: true
+        }
+      },
+      user: {
+        select: {
+          name: true,
+          image: true
+        }
+      },
+      _count: {
+        select: {
+          comments: true
+        }
+      }
+    },
+    where: {
+      OR: [
+        {
+          content: {
+            contains: postnamecontent
+          }
+        },
+        {
+          title: {
+            contains: postnamecontent
+          }
+        }
+      ]
     }
   })
 }

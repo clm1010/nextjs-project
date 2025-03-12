@@ -32,7 +32,7 @@ export default async function TopicList() {
           >
             <Chip
               classNames={{
-                base: 'bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30',
+                base: 'bg-gradient-to-br from-purple-500 to-yellow-300 border-small border-white/50 shadow-purple-500/30',
                 content: 'drop-shadow shadow-black text-white'
               }}
               variant='shadow'
