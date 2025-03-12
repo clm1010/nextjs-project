@@ -2,8 +2,17 @@
 import { signIn } from '@/auth'
 
 /**
- * @description 登录
+ * @description GitHub 登录
  */
-export async function SignIn() {
+export async function SignInGitHub() {
   return await signIn('github')
 }
+
+
+/**
+ * @description Gitee 登录
+ */
+export async function SignInGitee() {
+  return await signIn('gitee')
+}
+

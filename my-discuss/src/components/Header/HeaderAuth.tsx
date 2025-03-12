@@ -1,6 +1,6 @@
 'use client'
 import { useSession } from 'next-auth/react'
-import { SignIn, SignOut } from '@/actions/index'
+import { SignInGitHub, SignInGitee, SignOut } from '@/actions/index'
 import {
   NavbarItem,
   Form,
@@ -27,7 +27,7 @@ export default function HeaderAuth() {
 
   // 客户端组件方式，获取当前用户的信息
   const { data: session, status } = useSession()
-  console.log(session?.user, 'session');
+  console.log(session?.user, 'session')
   if (status === 'loading') {
     authContent = <Spinner size='md' variant='gradient' color='secondary' />
   } else if (session?.user) {
@@ -91,16 +91,21 @@ export default function HeaderAuth() {
     authContent = (
       <>
         <NavbarItem className='hidden lg:flex'>
-          <Form action={SignIn}>
-            <Button type='submit' color='secondary' variant='bordered'>
-              Sign In
+          <Form action={SignInGitHub}>
+            <Button
+              type='submit'
+              size='sm'
+              color='secondary'
+              variant='bordered'
+            >
+              GitHub
             </Button>
           </Form>
         </NavbarItem>
         <NavbarItem>
-          <Form action={SignIn}>
-            <Button type='submit' color='secondary'>
-              Sign Up
+          <Form action={SignInGitee}>
+            <Button type='submit' size='sm' color='secondary'>
+              Gitee
             </Button>
           </Form>
         </NavbarItem>
