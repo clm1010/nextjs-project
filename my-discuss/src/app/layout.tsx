@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { SessionProvider } from 'next-auth/react'
 import { Providers } from './providers'
 
 import Header from '@/components/Header'
@@ -27,16 +26,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>
-          <Providers>
-            <Header />
-            <div className='max-w-[1024px] px-6 mt-4 mx-auto'>{children}</div>
-          </Providers>
-        </SessionProvider>
+        <Providers>
+          <Header />
+          <div className="max-w-[1024px] px-6 mt-4 mx-auto">{children}</div>
+        </Providers>
       </body>
     </html>
   )

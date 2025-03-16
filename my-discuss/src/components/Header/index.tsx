@@ -1,3 +1,4 @@
+'use client'
 import {
   Navbar,
   NavbarBrand,
@@ -7,6 +8,8 @@ import {
 } from '@heroui/react'
 import HeaderAuth from './HeaderAuth'
 import SearchInput from '../SearchInput'
+import ThemeSwitcher from '../ThemeSwitcher'
+
 
 export const AcmeLogo = () => {
   return (
@@ -24,7 +27,7 @@ export const AcmeLogo = () => {
 /**
  * @description 头部组件
  */
-export default async function Header() {
+export default function Header() {
   return (
     <Navbar className="border-b-1 border-gray-200">
       <NavbarBrand>
@@ -39,6 +42,7 @@ export default async function Header() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        <ThemeSwitcher />
         <HeaderAuth />
       </NavbarContent>
     </Navbar>
