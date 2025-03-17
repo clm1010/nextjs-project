@@ -5,7 +5,7 @@ import { fetchTopics } from '@/db/queries/topics'
 // 抽离话题列表組件
 export const ListBoxWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='max-w-[260px] rounded-small border-2 mt-4 p-4 flex flex-wrap gap-4 dark:border-purple-600'>
+    <div className="max-w-[260px] rounded-small border-2 mt-4 p-4 flex flex-wrap gap-4 dark:border-purple-600">
       {children}
     </div>
   )
@@ -17,17 +17,17 @@ export const ListBoxWrapper = ({ children }: { children: React.ReactNode }) => {
 export default async function TopicList() {
   //  查询话题
   const topics = await fetchTopics()
-  console.log(topics, 'topics')
+
   return (
     <ListBoxWrapper>
       {topics.map((topic) => {
         return (
           <Badge
             key={topic.id}
-            size='sm'
-            shape='circle'
-            color='secondary'
-            variant='shadow'
+            size="sm"
+            shape="circle"
+            color="secondary"
+            variant="shadow"
             content={topic._count.posts}
           >
             <Chip
@@ -35,8 +35,8 @@ export default async function TopicList() {
                 base: 'bg-gradient-to-br from-purple-500 to-yellow-300 border-small border-white/50 shadow-purple-500/30',
                 content: 'drop-shadow shadow-black text-white'
               }}
-              variant='shadow'
-              color='default'
+              variant="shadow"
+              color="default"
             >
               <Link href={`/topics/${topic.name}`}>{topic.name}</Link>
             </Chip>

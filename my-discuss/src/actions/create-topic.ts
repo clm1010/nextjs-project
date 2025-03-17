@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { auth } from '@/auth'
 import type { Topic } from '@prisma/client'
 import { redirect } from 'next/navigation'
-import { sleep } from '@/utils'
+// import { sleep } from '@/utils'
 import { fetchCreateTopic } from '@/db/create/topics'
 
 interface CreateTopicFormState {
@@ -45,7 +45,7 @@ export async function CreateTopic(
   prevState: CreateTopicFormState,
   formData: FormData
 ): Promise<CreateTopicFormState> {
-  await sleep(3000)
+  // await sleep(3000)
 
   // 校验表单
   const name = formData.get('name')
@@ -72,14 +72,12 @@ export async function CreateTopic(
 
   let topic: Topic
   try {
-    console.log(result.data, 'result.data')
     // 创建话题提交数据到数据库
     topic = await fetchCreateTopic({
       name: result.data.name,
       description: result.data.description,
       userId: session.user.id!
     })
-    console.log(topic, 'topic')
   } catch (err: unknown) {
     if (err instanceof Error) {
       return {

@@ -1,7 +1,7 @@
 'use server'
 import { z } from 'zod'
 import { auth } from '@/auth'
-import type { Comment } from '@prisma/client'
+// import type { Comment } from '@prisma/client'
 import { fetchCreateComment } from '@/db/create/comment'
 import { fetchFindFirstTopicObjectByPostId } from '@/db/queries/topics'
 import { revalidatePath } from 'next/cache'
@@ -59,10 +59,11 @@ export async function CreateComment(
     }
   }
 
-  let comment: Comment
+  // let comment: Comment
 
   try {
-    comment = await fetchCreateComment({
+    // comment = await fetchCreateComment({
+    await fetchCreateComment({
       content: result.data.content,
       userId: session.user.id!,
       postId,
@@ -83,7 +84,7 @@ export async function CreateComment(
       }
     }
   }
-  console.log(comment, 'comment')
+
   // 根据帖子id查询话题
   const topic = await fetchFindFirstTopicObjectByPostId({ postId })
 

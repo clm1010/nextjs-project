@@ -1,4 +1,5 @@
 'use client'
+import { Suspense } from 'react'
 import {
   Navbar,
   NavbarBrand,
@@ -6,10 +7,12 @@ import {
   NavbarItem,
   Link
 } from '@heroui/react'
+// import dynamic from 'next/dynamic'
 import HeaderAuth from './HeaderAuth'
 import SearchInput from '../SearchInput'
 import ThemeSwitcher from '../ThemeSwitcher'
 
+// const ThemeSwitcher = dynamic(() => import('../ThemeSwitcher'), { ssr: false })
 
 export const AcmeLogo = () => {
   return (
@@ -31,14 +34,19 @@ export default function Header() {
   return (
     <Navbar className="shadow-md dark:shadow-purple-800">
       <NavbarBrand>
-        <Link className="flex items-center text-inherit ml-[-10px] dark:text-purple-800" href="/">
+        <Link
+          className="flex items-center text-inherit ml-[-10px] dark:text-purple-800"
+          href="/"
+        >
           <AcmeLogo />
           <h1 className="font-bold">MyDiscuss</h1>
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <SearchInput />
+          <Suspense>
+            <SearchInput />
+          </Suspense>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">

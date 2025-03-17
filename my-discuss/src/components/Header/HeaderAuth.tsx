@@ -27,7 +27,7 @@ export default function HeaderAuth() {
 
   // 客户端组件方式，获取当前用户的信息
   const { data: session, status } = useSession()
-  console.log(session?.user, 'session')
+  // console.log(session?.user, 'session')
   if (status === 'loading') {
     authContent = <Spinner size='md' variant='gradient' color='secondary' />
   } else if (session?.user) {

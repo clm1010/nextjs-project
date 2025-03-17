@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useTheme } from '@heroui/use-theme'
+// import { useTheme } from '@heroui/use-theme'
+import { useTheme } from 'next-themes'
 import { Moon, SunMoon } from 'lucide-react'
 
 export default function ThemeSwitcher() {
@@ -11,7 +12,9 @@ export default function ThemeSwitcher() {
     setMounted(true)
   }, [])
 
-  if (!mounted) return null
+  if (!mounted) {
+    return null
+  }
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
@@ -19,7 +22,11 @@ export default function ThemeSwitcher() {
 
   return (
     <div onClick={toggleTheme}>
-      {theme === 'light' ? <Moon size={20} /> : <SunMoon size={20} className='dark:text-gray-200' />}
+      {theme === 'light' ? (
+        <Moon size={20} />
+      ) : (
+        <SunMoon size={20} className="dark:text-gray-200" />
+      )}
     </div>
   )
 }

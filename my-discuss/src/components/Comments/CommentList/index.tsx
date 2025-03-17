@@ -15,8 +15,8 @@ export default async function CommentList({ postId }: CommentListProps) {
     (comment) => comment.parentId === null
   )
   return (
-    <div className='space-y-4'>
-      <h1 className='text-lg font-bold'>All 20 comments</h1>
+    <div className='space-y-4 !mt-8 pb-12'>
+      <h1 className='text-lg font-bold dark:text-gray-200'>All {comments.length} comments</h1>
       {topLevelComments.map((comment) => (
         <CommentShow key={comment.id} comment={comment} />
       ))}

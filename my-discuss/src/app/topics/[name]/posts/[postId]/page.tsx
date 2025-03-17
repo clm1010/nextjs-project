@@ -5,10 +5,10 @@ import CommentCreateForm from '@/components/Comments/CommentCreateForm/index'
 import CommentList from '@/components/Comments/CommentList'
 
 interface PostShowPageProps {
-  params: {
+  params: Promise<{
     name: string
     postId: string
-  }
+  }>
 }
 
 /**
@@ -23,7 +23,6 @@ export default async function PostShowPage({ params }: PostShowPageProps) {
         <PostShow postId={postId} />
       </Suspense>
       <CommentCreateForm postId={postId} isOpen />
-
       <CommentList postId={postId} />
     </div>
   )

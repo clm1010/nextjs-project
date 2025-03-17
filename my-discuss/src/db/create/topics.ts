@@ -14,7 +14,7 @@ interface paramsType {
  */
 export const fetchCreateTopic = (params: paramsType) => {
   const { name, description, userId } = params
-  console.log(name, description, userId, 'name, description, userId')
+  // console.log(name, description, userId, 'name, description, userId')
   return prisma.topic.create({
     data: {
       name,
