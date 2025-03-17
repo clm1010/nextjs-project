@@ -19,11 +19,11 @@ export default async function CommentShow({
 }: {
   comment: CommentWithUser
 }) {
-  const { user, content, postId, id: commentId } = comment
+  const { user, content, postId, id: commentId, parentId } = comment
   // 从所有的评论中找到 parentId 等于当前的 comment.id ,找到的那个就是谁的 子评论
   const comments = await fetchCommentsByPostId(postId)
   return (
-    <div className='mt-2 p-4 rounded-lg shadow-small'>
+    <div className={`border mt-2 p-4 rounded-lg shadow-small dark:border-purple-600 ${parentId !== null && 'border-dashed'}`}>
       <div className='flex gap-4'>
         <Image
           className='w-10 h-10 rounded-full'

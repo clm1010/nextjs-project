@@ -13,7 +13,7 @@ export default function PostList({ posts }: { posts: PostWithData[] }) {
     <Listbox
       aria-label='Post List'
       itemClasses={{
-        base: 'border-small border-default-200 shadow-small rounded-medium mt-4 data-[hover=true]:bg-purple-400/30'
+        base: 'border-small border-default-200 shadow-small rounded-medium mt-4 data-[hover=true]:bg-purple-400/60 dark:border-purple-600'
       }}
     >
       {posts.map((post) => {
@@ -24,7 +24,7 @@ export default function PostList({ posts }: { posts: PostWithData[] }) {
         return (
           <ListboxItem
             key={post.id}
-            description={<p className='text-small mt-4'>{post.user.name}</p>}
+            description={<p className='text-small mt-4 text-gray-500 dark:text-gray-400'>{post.user.name}</p>}
             startContent={
               post.user.image && (
                 <div>
@@ -50,7 +50,7 @@ export default function PostList({ posts }: { posts: PostWithData[] }) {
               router.push(`/topics/${topicName}/posts/${post.id}`)
             }}
           >
-            {post.title}
+            <span className='text-medium dark:text-gray-200'>{post.title}</span>
           </ListboxItem>
         )
       })}

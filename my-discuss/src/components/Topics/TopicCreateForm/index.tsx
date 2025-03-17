@@ -54,7 +54,7 @@ export default function TopicCreateForm() {
       </PopoverTrigger>
       <PopoverContent className="p-0 w-full">
         <Card className="w-80 max-w-md" shadow="lg">
-          <CardHeader>Create a Topic</CardHeader>
+          <CardHeader className='dark:text-purple-600'>Create a Topic</CardHeader>
           <Divider />
           <CardBody>
             <Form
@@ -62,21 +62,22 @@ export default function TopicCreateForm() {
               onSubmit={handleSubmit}
               validationBehavior="aria"
             >
+              <label htmlFor="name" className='dark:text-purple-600'>Name</label>
               <Input
                 isInvalid={!!state.errors.name}
                 errorMessage={state.errors.name?.join(', ')}
-                label="Name"
+                // label="Name"
                 labelPlacement="outside"
                 name="name"
                 placeholder="Enter your name"
                 type="text"
               />
-
+              <label htmlFor="description" className='dark:text-purple-600'>Description</label>
               <Textarea
                 isInvalid={!!state.errors.description}
                 errorMessage={state.errors.description?.join(', ')}
                 className="max-w-xs"
-                label="Description"
+                // label="Description"
                 labelPlacement="outside"
                 name="description"
                 placeholder="Enter your description"

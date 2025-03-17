@@ -19,7 +19,7 @@ export default function ThemeSwitcher() {
 
   return (
     <div onClick={toggleTheme}>
-      {theme === 'light' ? <Moon size={20} /> : <SunMoon size={20} />}
+      {theme === 'light' ? <Moon size={20} /> : <SunMoon size={20} className='dark:text-gray-200' />}
     </div>
   )
 }

@@ -29,9 +29,9 @@ export const AcmeLogo = () => {
  */
 export default function Header() {
   return (
-    <Navbar className="border-b-1 border-gray-200">
+    <Navbar className="shadow-md dark:shadow-purple-800">
       <NavbarBrand>
-        <Link className="flex items-center text-inherit ml-[-10px]" href="/">
+        <Link className="flex items-center text-inherit ml-[-10px] dark:text-purple-800" href="/">
           <AcmeLogo />
           <h1 className="font-bold">MyDiscuss</h1>
         </Link>

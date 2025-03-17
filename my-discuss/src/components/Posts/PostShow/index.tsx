@@ -19,30 +19,14 @@ export default async function PostShow({ postId }: PostShowProps) {
     notFound()
   }
   return (
-    <Card isFooterBlurred className='border-none' radius='lg'>
+    <Card isFooterBlurred className='dark:border-2 border-purple-600' radius='lg'>
       <CardHeader className='justify-between'>
-        <h3 className='text-2xl'>{post.title}</h3>
+        <h3 className='text-2xl dark:text-gray-200'>{post.title}</h3>
       </CardHeader>
       <CardBody className='px-3 py-0 text-medium text-default-400'>
         <p>{post.content}</p>
-
-        {/* <span className='pt-2'>
-          #FrontendWithZoey
-          <span className='py-2'>
-          {post.content}
-          {post.content}
-          {post.content}
-          {post.content}
-          {post.content}
-          {post.content}
-          {post.content}
-          {post.content}
-          {post.content}
-          {post.content}
-          </span>
-        </span> */}
       </CardBody>
-      <CardFooter className='gap-3'>
+      <CardFooter className='gap-3 dark:text-gray-400'>
         <p>{post.title}</p>
       </CardFooter>
     </Card>

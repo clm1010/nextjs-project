@@ -68,7 +68,7 @@ export default function HeaderAuth() {
             </CardHeader>
             <Divider />
             <CardBody>
-              <p>
+              <p className='dark:text-gray-200'>
                 Full-stack developer, @hero_ui lover she/her
                 <span aria-label='confetti' role='img'>
                   🎉

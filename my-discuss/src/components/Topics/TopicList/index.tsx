@@ -5,7 +5,7 @@ import { fetchTopics } from '@/db/queries/topics'
 // 抽离话题列表組件
 export const ListBoxWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='max-w-[260px] rounded-small border-2 mt-4 p-4 flex flex-wrap gap-4'>
+    <div className='max-w-[260px] rounded-small border-2 mt-4 p-4 flex flex-wrap gap-4 dark:border-purple-600'>
       {children}
     </div>
   )
