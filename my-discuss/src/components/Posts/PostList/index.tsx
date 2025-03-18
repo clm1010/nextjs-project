@@ -24,7 +24,12 @@ export default function PostList({ posts }: { posts: PostWithData[] }) {
         return (
           <ListboxItem
             key={post.id}
-            description={<p className='text-small mt-4 text-gray-500 dark:text-gray-400'>{post.user.name}</p>}
+            textValue={post.title}
+            description={
+              <p className='text-small mt-4 text-gray-500 dark:text-gray-400'>
+                {post.user.name}
+              </p>
+            }
             startContent={
               post.user.image && (
                 <div>

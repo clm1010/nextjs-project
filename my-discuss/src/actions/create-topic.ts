@@ -5,6 +5,7 @@ import type { Topic } from '@prisma/client'
 import { redirect } from 'next/navigation'
 // import { sleep } from '@/utils'
 import { fetchCreateTopic } from '@/db/create/topics'
+import { revalidatePath } from 'next/cache'
 
 interface CreateTopicFormState {
   errors: {
@@ -95,6 +96,9 @@ export async function CreateTopic(
       }
     }
   }
+
+  // 校验缓存，否则上线的项目新建后没有数据，不显示
+  revalidatePath('/')
 
   redirect(`/topics/${topic.name}`)
 }
