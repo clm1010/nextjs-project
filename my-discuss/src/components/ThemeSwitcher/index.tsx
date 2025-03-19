@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react'
-// import { useTheme } from '@heroui/use-theme'
 import { useTheme } from 'next-themes'
 import { Moon, SunMoon } from 'lucide-react'
 
@@ -25,7 +24,7 @@ export default function ThemeSwitcher() {
       {theme === 'light' ? (
         <Moon size={20} />
       ) : (
-        <SunMoon size={20} className="dark:text-gray-200" />
+        <SunMoon size={20} className='dark:text-gray-200' />
       )}
     </div>
   )
