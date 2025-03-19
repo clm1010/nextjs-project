@@ -20,7 +20,10 @@ export default function ThemeSwitcher() {
   }
 
   return (
-    <div onClick={toggleTheme}>
+    <div
+      onClick={toggleTheme}
+      className='w-8 h-8 flex justify-center items-center cursor-pointer rounded-lg hover:bg-default-200 dark:hover:bg-purple-800'
+    >
       {theme === 'light' ? (
         <Moon size={20} />
       ) : (
